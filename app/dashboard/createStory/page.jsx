@@ -2,6 +2,7 @@
 
 import React from "react";
 import StorySubject from "./components/StorySubject";
+import AgeGroup from "./components/AgeGroup";
 
 const CreateStory = () => {
   const [userInput, setUserInput] = React.useState("");
@@ -33,7 +34,9 @@ const CreateStory = () => {
           <StorySubject onUserInput={handleUserInput} />
         </div>
 
-        <div className="border border-darkCyan p-5 rounded-2xl"></div>
+        <div className="border border-darkCyan p-5 rounded-2xl">
+            <AgeGroup onUserInput={handleUserInput} />
+        </div>
 
         <div className="border border-darkCyan p-5 rounded-2xl"></div>
 
