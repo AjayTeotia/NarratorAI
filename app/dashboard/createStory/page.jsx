@@ -4,6 +4,7 @@ import React from "react";
 import StorySubject from "./components/StorySubject";
 import AgeGroup from "./components/AgeGroup";
 import StoryType from "./components/StoryType";
+import StoryOption from "./components/StoryOption";
 
 const CreateStory = () => {
   const [userInput, setUserInput] = React.useState("");
@@ -31,19 +32,21 @@ const CreateStory = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 border-2 rounded-2xl border-darkCyan p-5 gap-10">
-        <div className="border border-darkCyan p-5 rounded-2xl">
+        <div className="flex flex-col items-center justify-center w-full border border-darkCyan p-5 rounded-2xl">
           <StorySubject onUserInput={handleUserInput} />
         </div>
 
-        <div className="border border-darkCyan p-5 rounded-2xl">
-            <AgeGroup onUserInput={handleUserInput} />
+        <div className="flex flex-col items-center justify-center w-full border border-darkCyan p-5 rounded-2xl">
+          <AgeGroup onUserInput={handleUserInput} />
         </div>
 
-        <div className="border border-darkCyan p-5 rounded-2xl">
-            <StoryType onUserInput={handleUserInput} />
+        <div className="flex flex-col items-center justify-center w-full border border-darkCyan p-5 rounded-2xl">
+          <StoryType onUserInput={handleUserInput} />
         </div>
 
-        <div className="border border-darkCyan p-5 rounded-2xl"></div>
+        <div className="flex flex-col items-center justify-center w-full border border-darkCyan p-5 rounded-2xl">
+          <StoryOption onUserInput={handleUserInput} />
+        </div>
       </div>
     </div>
   );
