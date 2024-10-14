@@ -4,8 +4,8 @@ import { db } from "@/configs/DB";
 import { StoryData } from "@/configs/Schema";
 import { eq } from "drizzle-orm";
 import React from "react";
-import StoryBasicInfo from "../components/StoryBasicInfo";
-import StoryChapter from "./StoryChapter";
+import StoryBasicInfo from "./components/StoryBasicInfo";
+import StoryChapter from "./components/StoryChapter";
 
 const View = ({ params }) => {
   console.log("params", params);
