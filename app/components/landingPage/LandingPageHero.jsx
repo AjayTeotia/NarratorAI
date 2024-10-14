@@ -24,7 +24,7 @@ const LandingPageHero = () => {
 
           {user ? (
             <Link href={"/dashboard"} className="prata-regular">
-              <Button className="bg-gradient-to-r from-darkCyan to-greenCyan font-bold hidden sm:block">
+              <Button className="bg-gradient-to-r from-darkCyan to-greenCyan font-bold">
                 Dashboard
               </Button>
             </Link>
