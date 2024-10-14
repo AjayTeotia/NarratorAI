@@ -9,7 +9,7 @@ import React from "react";
 const Dashboard = () => {
   const { user } = useUser();
   return (
-    <div className="my-5 p-5 flex flex-col justify-between sm:flex-row border-b-2 border-darkCyan">
+    <div className="my-5 p-5 flex flex-col justify-between sm:flex-row border-b-4 border-darkCyan">
       <div className="flex items-center justify-center flex-col">
         <h1 className="text-2xl md:text-3xl">
           Welcome back, {""}
@@ -26,7 +26,7 @@ const Dashboard = () => {
 
       <div className="flex items-center justify-center">
         <Link href="/dashboard/createStory">
-          <Button>
+          <Button className="bg-gradient-to-r from-darkCyan to-greenCyan font-bold">
             <PlusIcon /> Create Story
           </Button>
         </Link>
