@@ -14,7 +14,7 @@ import LoadingDialog from "@/app/components/LoadingDialog";
 import { useRouter } from "next/navigation";
 
 const CreateStory = () => {
-  const [userInput, setUserInput] = React.useState("");
+  const [userInput, setUserInput] = React.useState({});
   const [loading, setLoading] = React.useState(false);
   const router = useRouter();
 
@@ -23,15 +23,11 @@ const CreateStory = () => {
       ...prev,
       [event.fieldName]: event.fieldValue,
     }));
-
-    console.log("userInput", userInput);
   };
 
   const CREATE_STORY_PROMPT = process.env.NEXT_PUBLIC_CREATE_STORY_PROMPT;
 
   const GenerateStoryByAI = async () => {
-    console.log(CREATE_STORY_PROMPT);
-
     setLoading(true);
     try {
       const FINAL_PROMPT_TEXT = CREATE_STORY_PROMPT.replace(
@@ -43,30 +39,23 @@ const CreateStory = () => {
         .replace("{chapters}", userInput?.chapters)
         .replace("{duration}", userInput?.duration);
 
-      console.log("final input", FINAL_PROMPT_TEXT);
-
       const res = await GenerateStory.sendMessage(FINAL_PROMPT_TEXT);
+      const storyOutput = res.response.text();
 
-      console.log(res.response.text());
+      const storyId = await SaveInDB(storyOutput);
 
-      SaveInDB(res.response.text());
-
-      setLoading(false);
-
-      router.push(`/dashboard/view/${storyId}`);
-
+      router.replace(`/dashboard/view/${storyId}`);
     } catch (error) {
       console.log(error);
+    } finally {
       setLoading(false);
     }
   };
 
   const SaveInDB = async (output) => {
-    setLoading(true);
     const uuid = uuidv4();
-
     try {
-      const res = await db.insert(StoryData).values({
+      await db.insert(StoryData).values({
         storyId: uuid,
         storyInput: userInput?.storyTitle,
         ageGroup: userInput?.ageGroup,
@@ -76,13 +65,9 @@ const CreateStory = () => {
         storyOutput: JSON.parse(output),
       });
 
-      console.log(res);
-
-
-      setLoading(false);
+      return uuid;
     } catch (error) {
       console.log(error);
-      setLoading(false);
     }
   };
 
@@ -92,7 +77,6 @@ const CreateStory = () => {
         <h1 className="bg-gradient-to-r from-darkCyan to-greenCyan bg-clip-text text-transparent font-bold prata-regular text-2xl md:text-4xl">
           Create Your Story
         </h1>
-
         <p className="my-2 text-xl sm:text-2xl">
           Unlock your creativity with AI: Craft stories like never before! Let
           our AI bring your imagination to life, one story at a time.

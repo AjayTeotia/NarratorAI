@@ -5,6 +5,7 @@ import { StoryData } from "@/configs/Schema";
 import { eq } from "drizzle-orm";
 import React from "react";
 import StoryBasicInfo from "../components/StoryBasicInfo";
+import StoryChapter from "./StoryChapter";
 
 const View = ({ params }) => {
   console.log("params", params);
@@ -29,7 +30,7 @@ const View = ({ params }) => {
     <div>
       <StoryBasicInfo story={story} />
 
-      
+      <StoryChapter story={story} />
     </div>
   );
 };
