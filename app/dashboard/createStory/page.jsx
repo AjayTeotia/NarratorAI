@@ -6,10 +6,17 @@ import AgeGroup from "./components/AgeGroup";
 import StoryType from "./components/StoryType";
 import StoryOption from "./components/StoryOption";
 import { Button } from "@/components/ui/button";
+import { GenerateStory } from "@/configs/AIModel";
+import { db } from "@/configs/DB";
+import { StoryData } from "@/configs/Schema";
+import { v4 as uuidv4 } from "uuid";
+import LoadingDialog from "@/app/components/LoadingDialog";
+import { useRouter } from "next/navigation";
 
 const CreateStory = () => {
   const [userInput, setUserInput] = React.useState("");
   const [loading, setLoading] = React.useState(false);
+  const router = useRouter();
 
   const handleUserInput = (event) => {
     setUserInput((prev) => ({
@@ -37,8 +44,45 @@ const CreateStory = () => {
         .replace("{duration}", userInput?.duration);
 
       console.log("final input", FINAL_PROMPT_TEXT);
+
+      const res = await GenerateStory.sendMessage(FINAL_PROMPT_TEXT);
+
+      console.log(res.response.text());
+
+      SaveInDB(res.response.text());
+
+      setLoading(false);
+
+      router.push(`/dashboard/view/${storyId}`);
+
     } catch (error) {
       console.log(error);
+      setLoading(false);
+    }
+  };
+
+  const SaveInDB = async (output) => {
+    setLoading(true);
+    const uuid = uuidv4();
+
+    try {
+      const res = await db.insert(StoryData).values({
+        storyId: uuid,
+        storyInput: userInput?.storyTitle,
+        ageGroup: userInput?.ageGroup,
+        storyType: userInput?.StoryTypes,
+        chapters: userInput?.chapters,
+        duration: userInput?.duration,
+        storyOutput: JSON.parse(output),
+      });
+
+      console.log(res);
+
+
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
     }
   };
 
@@ -81,6 +125,8 @@ const CreateStory = () => {
         >
           Generate Story
         </Button>
+
+        <LoadingDialog loading={loading} />
       </div>
     </div>
   );
