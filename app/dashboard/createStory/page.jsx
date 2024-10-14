@@ -5,9 +5,11 @@ import StorySubject from "./components/StorySubject";
 import AgeGroup from "./components/AgeGroup";
 import StoryType from "./components/StoryType";
 import StoryOption from "./components/StoryOption";
+import { Button } from "@/components/ui/button";
 
 const CreateStory = () => {
   const [userInput, setUserInput] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
 
   const handleUserInput = (event) => {
     setUserInput((prev) => ({
@@ -16,6 +18,28 @@ const CreateStory = () => {
     }));
 
     console.log("userInput", userInput);
+  };
+
+  const CREATE_STORY_PROMPT = process.env.NEXT_PUBLIC_CREATE_STORY_PROMPT;
+
+  const GenerateStoryByAI = async () => {
+    console.log(CREATE_STORY_PROMPT);
+
+    setLoading(true);
+    try {
+      const FINAL_PROMPT_TEXT = CREATE_STORY_PROMPT.replace(
+        "{ageGroup}",
+        userInput?.ageGroup
+      )
+        .replace("{storyType}", userInput?.StoryTypes)
+        .replace("{subjectInput}", userInput?.storyTitle)
+        .replace("{chapters}", userInput?.chapters)
+        .replace("{duration}", userInput?.duration);
+
+      console.log("final input", FINAL_PROMPT_TEXT);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -32,21 +56,31 @@ const CreateStory = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 border-2 rounded-2xl border-darkCyan p-5 gap-10">
-        <div className="flex flex-col items-center justify-center w-full border border-darkCyan p-5 rounded-2xl">
+        <div className="w-full border border-darkCyan p-5 rounded-2xl">
           <StorySubject onUserInput={handleUserInput} />
         </div>
 
-        <div className="flex flex-col items-center justify-center w-full border border-darkCyan p-5 rounded-2xl">
+        <div className="w-full border border-darkCyan p-5 rounded-2xl">
           <AgeGroup onUserInput={handleUserInput} />
         </div>
 
-        <div className="flex flex-col items-center justify-center w-full border border-darkCyan p-5 rounded-2xl">
+        <div className="w-full border border-darkCyan p-5 rounded-2xl">
           <StoryType onUserInput={handleUserInput} />
         </div>
 
-        <div className="flex flex-col items-center justify-center w-full border border-darkCyan p-5 rounded-2xl">
+        <div className="w-full border border-darkCyan p-5 rounded-2xl">
           <StoryOption onUserInput={handleUserInput} />
         </div>
+      </div>
+
+      <div className="mt-8 flex justify-end">
+        <Button
+          className="bg-gradient-to-r from-darkCyan to-greenCyan font-bold"
+          onClick={GenerateStoryByAI}
+          disabled={loading}
+        >
+          Generate Story
+        </Button>
       </div>
     </div>
   );
