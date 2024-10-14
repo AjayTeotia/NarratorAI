@@ -1,3 +1,5 @@
+"use client";
+
 import LandingPageHeader from "./components/landingPage/LandingPageHeader";
 import LandingPageHero from "./components/landingPage/LandingPageHero";
 
