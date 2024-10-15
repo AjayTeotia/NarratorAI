@@ -22,6 +22,10 @@ const StoryCard = ({ story }) => {
               <span className="text-sm">{story?.storyType}</span>
             </p>
           </div>
+
+          <p className="p-2 border border-darkCyan rounded-full shadow-lg text-darkCyan">
+            {story?.createdBy}
+          </p>
         </div>
       </Link>
     </div>

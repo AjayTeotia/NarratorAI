@@ -32,11 +32,11 @@ const DashboardHeader = () => {
       icon: <TelescopeIcon />,
     },
 
-    {
+    /*{
       label: "Contact Us",
       href: "/dashboard/contact",
       icon: <UserIcon />,
-    },
+    },*/
   ];
 
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);

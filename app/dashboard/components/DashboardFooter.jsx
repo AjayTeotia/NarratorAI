@@ -26,11 +26,11 @@ const DashboardFooter = () => {
       icon: <TelescopeIcon />,
     },
 
-    {
+    /*{
       label: "Contact Us",
       href: "/dashboard/contact",
       icon: <UserIcon />,
-    },
+    },*/
   ];
 
   const socialMediaLinks = [
