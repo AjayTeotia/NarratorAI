@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# NarratorAI
 
-First, run the development server:
+Welcome to NarratorAI! This web application allows users to generate personalized children's stories by filling in a few details. Built with modern technologies, this project aims to provide an engaging storytelling experience for kids and parents alike.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Technologies Used
+- Next.js: A powerful React framework for building server-rendered applications.
+- Clerk: For user authentication, ensuring a secure and seamless sign-in experience.
+- Tailwind CSS: A utility-first CSS framework for designing responsive and modern UI.
+- ShadcnUI: A component library for crafting beautiful user interfaces.
+- Database: Utilizing Neno Drizzle ORM for database interactions.
+- AI: Powered by Gemini AI for generating creative story content.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features
+- User authentication through Clerk.
+- Simple and intuitive form for entering story details.
+- AI-generated stories tailored to user input.
+- Responsive design using Tailwind CSS for optimal viewing on all devices.
+- Modern UI components from ShadcnUI.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### Getting Started
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Prerequisites
+- Node.js (v14 or later)
+- npm
 
-## Learn More
+### Installation
+    1. Clone the repository:
+    ```bash
+        git clone https://github.com/yourusername/narratorai.git
+    
+    2. Navigate to the project directory:
+    ```bash
+        cd narratorai
 
-To learn more about Next.js, take a look at the following resources:
+    3. Install the dependencies:
+    ```bash
+        npm install
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Configuration
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+    1. Set up your Clerk account and obtain the necessary API keys.
 
-## Deploy on Vercel
+    2. Create a .env.local file in the root directory and add your Clerk API     keys:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+        ``` bash
+            NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
+            CLERK_SECRET_KEY=
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+            NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+            NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+
+            NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/dashboard
+            NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/dashboard
+
+            NEXT_PUBLIC_CREATE_STORY_PROMPT = create kids' story in full description for {ageGroup} Years kids, {storyType}, story of {subjectInput}, give me {chapters} chapter for the {duration} , and  With detailed description and creative title make a long description for each chapter make a title for the story, all in JSON field format
+
+            NEXT_PUBLIC_GEMINI_API_KEY = 
+            NEXT_PUBLIC_DB_STRING = 
+    4. Open your browser and navigate to http://localhost:3000.
