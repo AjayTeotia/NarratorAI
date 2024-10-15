@@ -12,8 +12,10 @@ import { StoryData } from "@/configs/Schema";
 import { v4 as uuidv4 } from "uuid";
 import LoadingDialog from "@/app/components/LoadingDialog";
 import { useRouter } from "next/navigation";
+import { useUser } from "@clerk/nextjs";
 
 const CreateStory = () => {
+  const {user} = useUser();
   const [userInput, setUserInput] = React.useState({});
   const [loading, setLoading] = React.useState(false);
   const router = useRouter();
@@ -63,6 +65,7 @@ const CreateStory = () => {
         chapters: userInput?.chapters,
         duration: userInput?.duration,
         storyOutput: JSON.parse(output),
+        createdBy: user?.primaryEmailAddress?.emailAddress
       });
 
       return uuid;

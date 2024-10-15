@@ -16,4 +16,5 @@ export const StoryData = pgTable("story_data", {
   chapters: numeric("chapters").notNull(),
   duration: varchar("duration").notNull(),
   storyOutput: json("story_output").notNull(),
+  createdBy: varchar("created_by").notNull(),
 });

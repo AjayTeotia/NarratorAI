@@ -2,12 +2,14 @@
 
 import { db } from "@/configs/DB";
 import { StoryData } from "@/configs/Schema";
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 import React from "react";
 import StoryBasicInfo from "./components/StoryBasicInfo";
 import StoryChapter from "./components/StoryChapter";
+import { useUser } from "@clerk/nextjs";
 
 const View = ({ params }) => {
+  const { user } = useUser();
   console.log("params", params);
   const [story, setStory] = React.useState([]);
 
@@ -15,7 +17,12 @@ const View = ({ params }) => {
     const res = await db
       .select()
       .from(StoryData)
-      .where(eq(StoryData?.storyId, params?.storyId));
+      .where(
+        and(
+          eq(StoryData.storyId, params.storyId),
+          eq(StoryData?.createdBy, user?.primaryEmailAddress?.emailAddress)
+        )
+      );
 
     console.log(res);
 
