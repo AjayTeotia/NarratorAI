@@ -17,12 +17,7 @@ const View = ({ params }) => {
     const res = await db
       .select()
       .from(StoryData)
-      .where(
-        and(
-          eq(StoryData.storyId, params.storyId),
-          eq(StoryData?.createdBy, user?.primaryEmailAddress?.emailAddress)
-        )
-      );
+      .where(eq(StoryData.storyId, params.storyId));
 
     // console.log(res);
 
