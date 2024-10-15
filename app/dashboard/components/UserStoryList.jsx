@@ -22,7 +22,7 @@ const UserStoryList = () => {
     
     setStoryList(res);
     setLoading(false); 
-    console.log(res);
+    //console.log(res);
   };
 
   React.useEffect(() => {

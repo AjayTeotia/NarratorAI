@@ -15,7 +15,7 @@ const Explore = () => {
     setLoading(true);
     const res = await db.select().from(StoryData).orderBy(desc(StoryData.id));
 
-    console.log(res);
+    // console.log(res);
 
     setStoryList(res);
     setLoading(false);

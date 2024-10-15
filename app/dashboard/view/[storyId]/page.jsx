@@ -10,7 +10,7 @@ import { useUser } from "@clerk/nextjs";
 
 const View = ({ params }) => {
   const { user } = useUser();
-  console.log("params", params);
+  // console.log("params", params);
   const [story, setStory] = React.useState([]);
 
   const GetStory = async () => {
@@ -24,7 +24,7 @@ const View = ({ params }) => {
         )
       );
 
-    console.log(res);
+    // console.log(res);
 
     setStory(res[0]);
   };
