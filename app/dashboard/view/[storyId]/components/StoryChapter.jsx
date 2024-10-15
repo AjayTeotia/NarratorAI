@@ -7,7 +7,7 @@ const StoryChapter = ({ story }) => {
   return (
     <div className="flex justify-center items-center border-2 border-darkCyan p-5 rounded-3xl">
       <div className="sm:border-4 p-5 border-darkCyan rounded-3xl shadow-lg">
-        <HTMLFlipBook width={300} height={500}>
+        <HTMLFlipBook width={300} height={1000}>
           <div className="flex items-center justify-center h-full text-2xl font-bold text-darkCyan sm:text-4xl text-center prata-regular">
             {story?.storyOutput?.title || "Untitled Story"}
           </div>
